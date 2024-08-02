@@ -61,7 +61,6 @@ class Database(url: String, properties: Properties) {
         this.logger.info { "success" }
     }
 
-    fun isClosed(): Boolean {
-        return this.conn.isClosed
-    }
+    val isClosed: Boolean
+        get() = this.conn.isClosed
 }

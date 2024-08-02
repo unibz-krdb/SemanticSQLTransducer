@@ -7,8 +7,8 @@ class DatabaseTests {
     @Test
     fun testConstructor() {
         var db = Database("postgresql", "localhost", "5432", "ssqlt_test")
-        assert(!db.isClosed())
+        assert(!db.isClosed)
         db.close()
-        assert(db.isClosed())
+        assert(db.isClosed)
     }
 }
