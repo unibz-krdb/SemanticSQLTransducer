@@ -6,6 +6,7 @@
 
 - Java 21
 - Gradle 8.9
+- PostgreSQL
 
 **Build**
 
