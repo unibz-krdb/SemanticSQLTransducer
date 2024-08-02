@@ -64,5 +64,4 @@ class Database(url: String, properties: Properties) {
     fun isClosed(): Boolean {
         return this.conn.isClosed
     }
-
 }
