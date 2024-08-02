@@ -33,7 +33,7 @@ class Database(url: String, properties: Properties) {
         this.logger.debug { "success" }
     }
 
-    fun query(qry: String): ResultSet {
+    fun query(qry: String, commit: Boolean = false): ResultSet {
         this.logger.info { "Executing query..." }
         this.logger.debug { "Executing query: $qry" }
         var stmt = this.conn.createStatement()
@@ -46,7 +46,22 @@ class Database(url: String, properties: Properties) {
                     throw e
                 }
         this.logger.info { "success" }
+        if (commit) {
+            this.commit()
+        }
         return rs
+    }
+
+    fun commit() {
+        this.logger.info { "Committing..." }
+        try {
+            this.conn.commit()
+        } catch (e: Exception) {
+            this.logger.error { "failed" }
+            this.logger.debug { e.stackTraceToString() }
+            throw e
+        }
+        this.logger.info { "success" }
     }
 
     fun close() {
