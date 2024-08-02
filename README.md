@@ -2,6 +2,8 @@
 
 Based on over a decade of rigorous theoretical research, the *Semantic SQL Transducer* is a well-founded but practical tool providing the materialised lossless conceptual view of an arbitrary relational source data, contributing to a knowledge-centric data stack ([paper](https://arxiv.org/abs/2407.07502), [presentation](https://www.youtube.com/watch?v=L2uwlsEG8ZE)).
 
+*DISCLAIMER:* This repository is in its infancy and as such all builds should be regarded as unstable.
+
 ## Usage
 
 **Requirements**
@@ -33,6 +35,3 @@ We greatly look forward to accepting external contributions, but the project is 
 
 Watch this space!
 
-## Disclaimer
-
-This repository is in its infancy and as such all builds should be regarded as unstable. 
