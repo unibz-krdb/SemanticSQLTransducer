@@ -45,10 +45,24 @@ class Database(url: String, properties: Properties) {
                     this.logger.debug { e.stackTraceToString() }
                     throw e
                 }
+        this.logger.info { "success" }
         return rs
     }
 
     fun close() {
-        this.conn.close()
+        this.logger.info { "Closing connection..." }
+        try {
+            this.conn.close()
+        } catch (e: Exception) {
+            this.logger.error { "failed" }
+            this.logger.debug { e.stackTraceToString() }
+            throw e
+        }
+        this.logger.info { "success" }
     }
+
+    fun isClosed(): Boolean {
+        return this.conn.isClosed
+    }
+
 }
