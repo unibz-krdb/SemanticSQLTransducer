@@ -7,7 +7,6 @@ plugins {
 }
 
 dependencies {
-
     implementation("org.postgresql:postgresql:42.1.4")
-
+    implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
 }

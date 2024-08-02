@@ -2,13 +2,14 @@ package eu.krdb.ssqlt.db
 
 import java.sql.*
 import java.util.Properties
-import java.util.logging.Logger
+import mu.KotlinLogging
 
 class Database(url: String, properties: Properties) {
 
     private var url: String
     private var props: Properties
     private var conn: Connection
+    private var logger = KotlinLogging.logger {}
 
     constructor(
             dbms: String,
@@ -21,24 +22,30 @@ class Database(url: String, properties: Properties) {
     init {
         this.url = url
         this.props = properties
+        this.logger.info { "Connecting to $url..." }
         try {
             this.conn = DriverManager.getConnection(url, properties)
-        } catch (e: ClassNotFoundException) {
-            e.printStackTrace()
+        } catch (e: Exception) {
+            this.logger.error { "failed" }
+            this.logger.debug { e.stackTraceToString() }
             throw e
         }
+        this.logger.debug { "success" }
     }
 
     fun query(qry: String): ResultSet {
+        this.logger.info { "Executing query..." }
+        this.logger.debug { "Executing query: $qry" }
         var stmt = this.conn.createStatement()
-        var rs = try {
-            stmt.executeQuery(qry)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            throw e
-        };
+        var rs =
+                try {
+                    stmt.executeQuery(qry)
+                } catch (e: Exception) {
+                    this.logger.error { "failed" }
+                    this.logger.debug { e.stackTraceToString() }
+                    throw e
+                }
         return rs
-
     }
 
     fun close() {
