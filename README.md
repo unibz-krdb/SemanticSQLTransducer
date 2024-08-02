@@ -6,9 +6,8 @@ This repository is in its infancy and as such all builds should be regarded as u
 
 **Requirements**
 
-- Java 21
-- Gradle 8.9
-- PostgreSQL
+- [Java 21](https://openjdk.org/projects/jdk/21/)
+- [Gradle 8.9](https://gradle.org/install/)
 
 **Build**
 
