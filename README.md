@@ -1,5 +1,7 @@
 # Semantic SQL Transducer
 
+This repository is in its infancy and as such all builds should be regarded as unstable. 
+
 ## Usage
 
 **Requirements**
@@ -10,13 +12,19 @@
 
 **Build**
 
-`gradle build`
+``` sh
+gradle build
+```
 
 **Test**
 
 Testing requires a running [postgres](https://www.postgresql.org/) instance containing an empty database *ssqlt_test*.
 
-`gradle test`
+``` sh
+gradle test
+```
+
+gradle test`
 
 ## License
 
