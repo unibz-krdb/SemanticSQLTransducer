@@ -23,8 +23,6 @@ Testing requires a running [postgres](https://www.postgresql.org/) instance cont
 gradle test
 ```
 
-gradle test`
-
 ## License
 
 This project is licensed under [LGPLv2.1](https://github.com/unibz-krdb/SemanticSQLTransducer/blob/main/LICENSE).
