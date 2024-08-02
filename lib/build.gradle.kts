@@ -5,3 +5,9 @@
 plugins {
     id("buildlogic.kotlin-library-conventions")
 }
+
+dependencies {
+
+    implementation("org.postgresql:postgresql:42.1.4")
+
+}
