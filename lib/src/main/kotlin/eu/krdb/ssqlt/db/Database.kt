@@ -33,6 +33,13 @@ class Database(url: String, properties: Properties) {
         this.logger.debug { "success" }
     }
 
+    /**
+     * Execute a query and return the result set.
+     *
+     * @param qry The query to execute.
+     * @param commit Whether to commit the transaction after executing the query.
+     * @return The result set.
+     */
     fun query(qry: String, commit: Boolean = false): ResultSet {
         this.logger.info { "Executing query..." }
         this.logger.debug { "Executing query: $qry" }
@@ -52,6 +59,7 @@ class Database(url: String, properties: Properties) {
         return rs
     }
 
+    /** Commit the database. */
     fun commit() {
         this.logger.info { "Committing..." }
         try {
