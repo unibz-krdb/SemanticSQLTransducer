@@ -53,9 +53,9 @@ gradle-app.setting
 hs_err_pid*
 replay_pid*
 
-##########
-# VSCODE #
-##########
+# ide
 .vscode
+.metals
+.idea
 
 full_transducer.sql
