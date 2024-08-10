@@ -12,11 +12,11 @@ class Database(url: String, properties: Properties) {
     private var logger = KotlinLogging.logger {}
 
     constructor(
-            dbms: String,
-            server: String,
-            port: String,
-            db: String,
-            properties: Properties = Properties()
+        dbms: String,
+        server: String,
+        port: String,
+        db: String,
+        properties: Properties = Properties()
     ) : this("jdbc:$dbms://$server:$port/$db", properties)
 
     init {
@@ -45,13 +45,13 @@ class Database(url: String, properties: Properties) {
         this.logger.debug { "Executing query: $qry" }
         var stmt = this.conn.createStatement()
         var rs =
-                try {
-                    stmt.executeQuery(qry)
-                } catch (e: Exception) {
-                    this.logger.error { "failed" }
-                    this.logger.debug { e.stackTraceToString() }
-                    throw e
-                }
+            try {
+                stmt.executeQuery(qry)
+            } catch (e: Exception) {
+                this.logger.error { "failed" }
+                this.logger.debug { e.stackTraceToString() }
+                throw e
+            }
         this.logger.info { "success" }
         if (commit) {
             this.commit()
