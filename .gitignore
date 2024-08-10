@@ -57,3 +57,5 @@ replay_pid*
 # VSCODE #
 ##########
 .vscode
+
+full_transducer.sql
