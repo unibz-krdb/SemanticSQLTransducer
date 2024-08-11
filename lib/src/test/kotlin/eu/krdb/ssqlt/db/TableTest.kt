@@ -11,6 +11,7 @@ class TableTest {
     @Test
     fun testConstructor() {
         val schema = "transducer"
+        val name = "person"
         val attributes = listOf(
             Attribute("ssn", "VARCHAR(100)", false),
             Attribute("phone", "VARCHAR(100)", false),
@@ -21,8 +22,9 @@ class TableTest {
             Attribute("mayor", "VARCHAR(100)", false),
         )
         val primaryKey = listOf("ssn", "phone")
-        val db = Table(schema, attributes, primaryKey)
+        val db = Table(schema, name, attributes, primaryKey)
         assertEquals(schema, db.schema)
+        assertEquals(name, db.name)
         assertEquals(attributes, db.attributes)
         assertEquals(primaryKey, db.primaryKey)
     }

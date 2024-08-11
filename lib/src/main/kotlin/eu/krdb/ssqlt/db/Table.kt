@@ -8,6 +8,7 @@ import java.io.Reader
 
 class Table(
     val schema: String,
+    val name: String,
     val attributes: List<Attribute>,
     val primaryKey: List<String>
 ) {
