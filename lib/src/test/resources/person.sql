@@ -6,7 +6,6 @@ CREATE TABLE ssqlt_test._person
       title VARCHAR(100),
       city VARCHAR(100) NOT NULL,
       country VARCHAR(100) NOT NULL,
-      mayor VARCHAR(100) NOT NULL
+      mayor VARCHAR(100) NOT NULL,
+      PRIMARY KEY (ssn,phone)
     );
-
-    ALTER TABLE ssqlt_test._person ADD PRIMARY KEY (ssn,phone);
