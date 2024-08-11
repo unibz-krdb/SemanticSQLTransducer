@@ -1,10 +1,27 @@
 package eu.krdb.ssqlt.db
 
 class Attribute(
-    val name: String,
-    val type: String,
-    val nullable: Boolean,
+    name: String,
+    type: String,
+    nullable: Boolean,
 ) {
+
+    val name: String
+    val type: String
+    val nullable: Boolean
+
+    init {
+        if (name.isBlank()) {
+            throw IllegalArgumentException("Attribute name cannot be blank.")
+        }
+        this.name = name.replace(" ", "")
+        if (type.isBlank()) {
+            throw IllegalArgumentException("Attribute type cannot be blank.")
+        }
+        this.type = type.replace(" ", "")
+        this.nullable = nullable
+    }
+
     fun toSql(): String {
         return "$name $type${if (nullable) "" else " NOT NULL"}"
     }
