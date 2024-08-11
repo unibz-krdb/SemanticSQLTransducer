@@ -13,10 +13,3 @@ dependencies {
     implementation("com.github.jsqlparser:jsqlparser:5.0")
 }
 
-configure<com.diffplug.gradle.spotless.SpotlessExtension> {
-    kotlin { ktfmt("0.51").kotlinlangStyle() }
-    kotlinGradle {
-        target("*.gradle.kts")
-        ktfmt("0.51").kotlinlangStyle()
-    }
-}
