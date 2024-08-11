@@ -17,7 +17,7 @@ class Table(
     companion object {
 
         fun fromFile(path: Path): Table {
-            return this.fromReader(Files.newBufferedReader(path, StandardCharsets.UTF_8))
+            return this.fromReader(Files.newBufferedReader(path))
         }
 
         fun fromReader(reader: Reader): Table {
