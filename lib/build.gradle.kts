@@ -10,12 +10,11 @@ plugins {
 dependencies {
     implementation("org.postgresql:postgresql:42.1.4")
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
+    implementation("com.github.jsqlparser:jsqlparser:5.0")
 }
 
 configure<com.diffplug.gradle.spotless.SpotlessExtension> {
-    kotlin {
-        ktfmt("0.51").kotlinlangStyle()
-    }
+    kotlin { ktfmt("0.51").kotlinlangStyle() }
     kotlinGradle {
         target("*.gradle.kts")
         ktfmt("0.51").kotlinlangStyle()
