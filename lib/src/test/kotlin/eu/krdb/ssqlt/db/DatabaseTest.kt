@@ -4,7 +4,7 @@ import eu.krdb.ssqlt.TestingUtils
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class DatabaseTests {
+class DatabaseTest {
 
     private val sqlPersonCreate = TestingUtils.getResourceFileString("person.sql")
 
@@ -15,5 +15,4 @@ class DatabaseTests {
         db.close()
         assert(db.isClosed)
     }
-
 }
