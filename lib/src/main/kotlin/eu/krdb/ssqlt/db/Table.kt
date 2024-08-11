@@ -1,22 +1,31 @@
+package eu.krdb.ssqlt.db
+
+import net.sf.jsqlparser.parser.CCJSqlParserUtil
+import java.nio.file.Path
+import java.nio.file.Files
+import java.nio.charset.StandardCharsets
+import java.io.Reader
+
 class Table(
-    schema: String,
-    name: String,
-    attributes: List<String>,
-    types: List<String>,
-    primaryKey: List<String>
+    val schema: String,
+    val attributes: List<Attribute>,
+    val primaryKey: List<String>
 ) {
 
-    val schema: String
-    val name: String
-    val attributes: List<String>
-    val types: List<String>
-    val primaryKey: List<String>
+    companion object {
 
-    init {
-        this.schema = schema
-        this.name = name
-        this.attributes = attributes
-        this.types = types
-        this.primaryKey = primaryKey
+        fun fromFile(path: Path): Table {
+            return this.fromReader(Files.newBufferedReader(path, StandardCharsets.UTF_8))
+        }
+
+        fun fromReader(reader: Reader): Table {
+            return this.fromString(reader.toString())
+        }
+
+        fun fromString(sql: String): Table {
+            val res = CCJSqlParserUtil.parse(sql)
+            throw NotImplementedError()
+        }
     }
+
 }
