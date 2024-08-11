@@ -28,4 +28,34 @@ class TableTest {
         assertEquals(attributes, db.attributes)
         assertEquals(primaryKey, db.primaryKey)
     }
+
+    @Test
+    fun testToSql() {
+        val schema = "transducer"
+        val name = "person"
+        val attributes = listOf(
+            Attribute("ssn", "VARCHAR(100)", false),
+            Attribute("phone", "VARCHAR(100)", false),
+            Attribute("manager", "VARCHAR(100)", true),
+            Attribute("title", "VARCHAR(100)", true),
+            Attribute("city", "VARCHAR(100)", false),
+            Attribute("country", "VARCHAR(100)", false),
+            Attribute("mayor", "VARCHAR(100)", false),
+        )
+        val primaryKey = listOf("ssn", "phone")
+        val db = Table(schema, name, attributes, primaryKey)
+        val expected = """
+            CREATE TABLE transducer.person (
+            ssn VARCHAR(100) NOT NULL,
+            phone VARCHAR(100) NOT NULL,
+            manager VARCHAR(100),
+            title VARCHAR(100),
+            city VARCHAR(100) NOT NULL,
+            country VARCHAR(100) NOT NULL,
+            mayor VARCHAR(100) NOT NULL,
+            PRIMARY KEY (ssn, phone)
+            )
+        """.trimIndent()
+        assertEquals(expected, db.toCreateTableSql())
+    }
 }

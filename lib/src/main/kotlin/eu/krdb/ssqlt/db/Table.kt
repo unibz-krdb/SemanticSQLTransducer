@@ -29,4 +29,15 @@ class Table(
         }
     }
 
+    fun toCreateTableSql(): String {
+        val builder = StringBuilder()
+        builder.append("CREATE TABLE $schema.$name (\n")
+        builder.append(attributes.joinToString(",\n") { it.toSql() })
+        if (primaryKey.isNotEmpty()) {
+            builder.append(",\nPRIMARY KEY (${primaryKey.joinToString(", ")})")
+        }
+        builder.append("\n)")
+        return builder.toString().trimIndent()
+    }
+
 }
