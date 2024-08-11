@@ -15,5 +15,4 @@ class DatabaseTests {
         db.close()
         assert(db.isClosed)
     }
-
 }
