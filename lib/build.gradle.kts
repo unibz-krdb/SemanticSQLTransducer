@@ -4,11 +4,15 @@
 
 plugins {
     id("buildlogic.kotlin-library-conventions")
-    id("com.diffplug.spotless") version "7.0.0.BETA1"
+    id("com.ncorti.ktfmt.gradle") version "0.19.0"
 }
 
 dependencies {
     implementation("org.postgresql:postgresql:42.1.4")
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
     implementation("com.github.jsqlparser:jsqlparser:5.0")
+}
+
+ktfmt {
+    kotlinLangStyle()
 }
