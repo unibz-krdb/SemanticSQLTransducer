@@ -7,10 +7,10 @@ import net.sf.jsqlparser.parser.CCJSqlParserUtil
 import net.sf.jsqlparser.statement.create.table.CreateTable
 
 class Table(
-        val schema: String,
-        val name: String,
-        val attributes: List<Attribute>,
-        val primaryKey: List<String>
+    val schema: String,
+    val name: String,
+    val attributes: List<Attribute>,
+    val primaryKey: List<String>
 ) {
 
     companion object {
@@ -30,18 +30,15 @@ class Table(
                     val schema = it.table.schemaName
                     val name = it.table.name
                     val attributes =
-                            it.columnDefinitions.map {
-                                Attribute(
-                                        it.columnName,
-                                        it.colDataType.dataType,
-                                        it.columnSpecs.isNullOrEmpty()
-                                )
-                            }
+                        it.columnDefinitions.map {
+                            Attribute(
+                                it.columnName,
+                                it.colDataType.dataType,
+                                it.columnSpecs.isNullOrEmpty())
+                        }
                     val primaryKey =
-                            it.indexes.find { it.type == "PRIMARY KEY" }?.columns?.map {
-                                it.columnName
-                            }
-                                    ?: emptyList()
+                        it.indexes.find { it.type == "PRIMARY KEY" }?.columns?.map { it.columnName }
+                            ?: emptyList()
                     return Table(schema, name, attributes, primaryKey)
                 } else {
                     throw Exception("Not a Create Table statement")

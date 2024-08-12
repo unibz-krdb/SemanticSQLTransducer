@@ -12,4 +12,3 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
     implementation("com.github.jsqlparser:jsqlparser:5.0")
 }
-

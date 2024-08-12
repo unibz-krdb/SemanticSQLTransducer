@@ -11,4 +11,5 @@ plugins {
 }
 
 rootProject.name = "SemanticSQLTransducer"
+
 include("app", "lib")
