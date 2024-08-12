@@ -1,17 +1,16 @@
 package eu.krdb.ssqlt.db
 
+import java.io.Reader
+import java.nio.file.Files
+import java.nio.file.Path
 import net.sf.jsqlparser.parser.CCJSqlParserUtil
 import net.sf.jsqlparser.statement.create.table.CreateTable
-import java.nio.file.Path
-import java.nio.file.Files
-import java.nio.charset.StandardCharsets
-import java.io.Reader
 
 class Table(
-    val schema: String,
-    val name: String,
-    val attributes: List<Attribute>,
-    val primaryKey: List<String>
+        val schema: String,
+        val name: String,
+        val attributes: List<Attribute>,
+        val primaryKey: List<String>
 ) {
 
     companion object {
@@ -30,13 +29,21 @@ class Table(
                 if (it is CreateTable) {
                     val schema = it.table.schemaName
                     val name = it.table.name
-                    val attributes = it.columnDefinitions.map {
-                        Attribute(it.columnName, it.colDataType.dataType, it.columnSpecs.isNullOrEmpty())
-                    }
-                    val primaryKey = it.indexes.find { it.type == "PRIMARY KEY" }?.columns?.map { it.columnName } ?: emptyList()
+                    val attributes =
+                            it.columnDefinitions.map {
+                                Attribute(
+                                        it.columnName,
+                                        it.colDataType.dataType,
+                                        it.columnSpecs.isNullOrEmpty()
+                                )
+                            }
+                    val primaryKey =
+                            it.indexes.find { it.type == "PRIMARY KEY" }?.columns?.map {
+                                it.columnName
+                            }
+                                    ?: emptyList()
                     return Table(schema, name, attributes, primaryKey)
-                }
-                else {
+                } else {
                     throw Exception("Not a Create Table statement")
                 }
             }
@@ -54,5 +61,4 @@ class Table(
         builder.append(")")
         return builder.toString()
     }
-
 }
