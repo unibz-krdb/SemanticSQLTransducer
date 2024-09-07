@@ -7,10 +7,9 @@ import net.sf.jsqlparser.parser.CCJSqlParserUtil
 import net.sf.jsqlparser.statement.create.table.CreateTable
 
 class Table(
-    val schema: String,
-    val name: String,
-    val attributes: List<Attribute>,
-    val primaryKey: List<String>
+        val identifier: TableIdentifier,
+        val attributes: List<Attribute>,
+        val primaryKey: List<String>,
 ) {
 
     companion object {
@@ -27,19 +26,22 @@ class Table(
             val parsed = CCJSqlParserUtil.parse(sql)
             parsed?.let {
                 if (it is CreateTable) {
-                    val schema = it.table.schemaName
-                    val name = it.table.name
+                    val identifier = TableIdentifier(it.table.schemaName, it.table.name)
                     val attributes =
-                        it.columnDefinitions.map {
-                            Attribute(
-                                it.columnName,
-                                it.colDataType.dataType,
-                                it.columnSpecs.isNullOrEmpty())
-                        }
+                            it.columnDefinitions.map {
+                                Attribute(
+                                        it.columnName,
+                                        it.colDataType.dataType,
+                                        it.columnSpecs.isNullOrEmpty(),
+                                        identifier
+                                )
+                            }
                     val primaryKey =
-                        it.indexes.find { it.type == "PRIMARY KEY" }?.columns?.map { it.columnName }
-                            ?: emptyList()
-                    return Table(schema, name, attributes, primaryKey)
+                            it.indexes.find { it.type == "PRIMARY KEY" }?.columns?.map {
+                                it.columnName
+                            }
+                                    ?: emptyList()
+                    return Table(identifier, attributes, primaryKey)
                 } else {
                     throw Exception("Not a Create Table statement")
                 }
@@ -50,6 +52,8 @@ class Table(
 
     fun toCreateTableSql(): String {
         val builder = StringBuilder()
+        val schema = this.identifier.schemaName
+        val name = this.identifier.tableName
         builder.append("CREATE TABLE $schema.$name(")
         builder.append(attributes.joinToString(",") { it.toSql() })
         if (primaryKey.isNotEmpty()) {
