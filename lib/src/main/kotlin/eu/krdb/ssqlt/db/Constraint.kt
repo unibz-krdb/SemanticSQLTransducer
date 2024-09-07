@@ -8,7 +8,6 @@ enum class ConstraintType {
 
 class Constraint(
     val schemaName: String,
-    val tableName: String,
     val constraintType: ConstraintType,
     val lhs: List<Attribute>,
     val rhs: List<Attribute>
