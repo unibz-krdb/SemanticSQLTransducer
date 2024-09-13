@@ -33,7 +33,7 @@ class Table(
                                 it.columnName,
                                 it.colDataType.dataType,
                                 it.columnSpecs.isNullOrEmpty(),
-                                identifier)
+                                )
                         }
                     val primaryKey =
                         it.indexes.find { it.type == "PRIMARY KEY" }?.columns?.map { it.columnName }

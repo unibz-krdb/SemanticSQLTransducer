@@ -15,13 +15,13 @@ class TableTest {
         val tableIdentifier = TableIdentifier(schema, name)
         val attributes =
             listOf(
-                Attribute("ssn", "VARCHAR(100)", false, tableIdentifier),
-                Attribute("phone", "VARCHAR(100)", false, tableIdentifier),
-                Attribute("manager", "VARCHAR(100)", true, tableIdentifier),
-                Attribute("title", "VARCHAR(100)", true, tableIdentifier),
-                Attribute("city", "VARCHAR(100)", false, tableIdentifier),
-                Attribute("country", "VARCHAR(100)", false, tableIdentifier),
-                Attribute("mayor", "VARCHAR(100)", false, tableIdentifier),
+                Attribute("ssn", "VARCHAR(100)", false),
+                Attribute("phone", "VARCHAR(100)", false),
+                Attribute("manager", "VARCHAR(100)", true),
+                Attribute("title", "VARCHAR(100)", true),
+                Attribute("city", "VARCHAR(100)", false),
+                Attribute("country", "VARCHAR(100)", false),
+                Attribute("mayor", "VARCHAR(100)", false),
             )
         val primaryKey = listOf("ssn", "phone")
         val db = Table(tableIdentifier, attributes, primaryKey)
@@ -37,13 +37,13 @@ class TableTest {
         val tableIdentifier = TableIdentifier(schema, name)
         val attributes =
             listOf(
-                Attribute("ssn", "VARCHAR (100)", false, tableIdentifier),
-                Attribute("phone", "VARCHAR (100)", false, tableIdentifier),
-                Attribute("manager", "VARCHAR (100)", true, tableIdentifier),
-                Attribute("title", "VARCHAR (100)", true, tableIdentifier),
-                Attribute("city", "VARCHAR (100)", false, tableIdentifier),
-                Attribute("country", "VARCHAR (100)", false, tableIdentifier),
-                Attribute("mayor", "VARCHAR (100)", false, tableIdentifier),
+                Attribute("ssn", "VARCHAR (100)", false),
+                Attribute("phone", "VARCHAR (100)", false),
+                Attribute("manager", "VARCHAR (100)", true),
+                Attribute("title", "VARCHAR (100)", true),
+                Attribute("city", "VARCHAR (100)", false),
+                Attribute("country", "VARCHAR (100)", false),
+                Attribute("mayor", "VARCHAR (100)", false),
             )
         val primaryKey = listOf("ssn", "phone")
         val db = Table(tableIdentifier, attributes, primaryKey)
@@ -57,13 +57,13 @@ class TableTest {
         assertEquals(tableIdentifier, table.identifier)
         assertEquals(
             listOf(
-                Attribute("ssn", "VARCHAR (100)", false, tableIdentifier),
-                Attribute("phone", "VARCHAR (100)", false, tableIdentifier),
-                Attribute("manager", "VARCHAR (100)", true, tableIdentifier),
-                Attribute("title", "VARCHAR (100)", true, tableIdentifier),
-                Attribute("city", "VARCHAR (100)", false, tableIdentifier),
-                Attribute("country", "VARCHAR (100)", false, tableIdentifier),
-                Attribute("mayor", "VARCHAR (100)", false, tableIdentifier),
+                Attribute("ssn", "VARCHAR (100)", false),
+                Attribute("phone", "VARCHAR (100)", false),
+                Attribute("manager", "VARCHAR (100)", true),
+                Attribute("title", "VARCHAR (100)", true),
+                Attribute("city", "VARCHAR (100)", false),
+                Attribute("country", "VARCHAR (100)", false),
+                Attribute("mayor", "VARCHAR (100)", false),
             ),
             table.attributes)
         assertEquals(listOf("ssn", "phone"), table.primaryKey)

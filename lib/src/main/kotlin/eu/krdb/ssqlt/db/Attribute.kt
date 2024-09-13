@@ -4,7 +4,6 @@ class Attribute(
     name: String,
     type: String,
     nullable: Boolean,
-    val tableIdentifier: TableIdentifier
 ) {
 
     val name: String
