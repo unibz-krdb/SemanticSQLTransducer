@@ -11,6 +11,12 @@ Based on over a decade of rigorous theoretical research, the *Semantic SQL Trans
 - [Java 21](https://openjdk.org/projects/jdk/21/)
 - [Gradle 8.9](https://gradle.org/install/)
 
+**Format**
+
+```sh
+gradle ktfmtFormat
+```
+
 **Build**
 
 ``` sh
