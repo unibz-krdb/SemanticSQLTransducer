@@ -12,7 +12,6 @@ class TableTest {
     fun testConstructor() {
         val schema = "transducer"
         val name = "person"
-        val tableIdentifier = TableIdentifier(schema, name)
         val attributes =
             listOf(
                 Attribute("ssn", "VARCHAR(100)", false),
@@ -24,8 +23,9 @@ class TableTest {
                 Attribute("mayor", "VARCHAR(100)", false),
             )
         val primaryKey = listOf("ssn", "phone")
-        val db = Table(tableIdentifier, attributes, primaryKey)
-        assertEquals(tableIdentifier, db.identifier)
+        val db = Table(schema, name, attributes, primaryKey)
+        assertEquals(schema, db.schemaName)
+        assertEquals(name, db.tableName)
         assertEquals(attributes, db.attributes)
         assertEquals(primaryKey, db.primaryKey)
     }
@@ -34,7 +34,6 @@ class TableTest {
     fun testToSql() {
         val schema = "ssqlt_test"
         val name = "_person"
-        val tableIdentifier = TableIdentifier(schema, name)
         val attributes =
             listOf(
                 Attribute("ssn", "VARCHAR (100)", false),
@@ -46,15 +45,17 @@ class TableTest {
                 Attribute("mayor", "VARCHAR (100)", false),
             )
         val primaryKey = listOf("ssn", "phone")
-        val db = Table(tableIdentifier, attributes, primaryKey)
+        val db = Table(schema, name, attributes, primaryKey)
         assertEquals(sqlPersonCreate, db.toCreateTableSql())
     }
 
     @Test
     fun testFromString() {
+        val schemaName = "ssqlt_test"
+        val tableName = "_person"
         val table = Table.fromString(sqlPersonCreate)
-        val tableIdentifier = TableIdentifier("ssqlt_test", "_person")
-        assertEquals(tableIdentifier, table.identifier)
+        assertEquals(schemaName, table.schemaName)
+        assertEquals(tableName, table.tableName)
         assertEquals(
             listOf(
                 Attribute("ssn", "VARCHAR (100)", false),
