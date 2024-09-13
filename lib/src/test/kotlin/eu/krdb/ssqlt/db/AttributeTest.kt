@@ -7,7 +7,8 @@ class AttributeTest {
 
     @Test
     fun testConstructor() {
-        val attribute = Attribute("ssn", "VARCHAR(100)", false)
+        val tableIdentifier = TableIdentifier("transducer", "person")
+        val attribute = Attribute("ssn", "VARCHAR(100)", false, tableIdentifier)
         assertEquals("ssn", attribute.name)
         assertEquals("VARCHAR(100)", attribute.type)
         assertEquals(false, attribute.nullable)
@@ -15,9 +16,10 @@ class AttributeTest {
 
     @Test
     fun testToSql() {
-        var attribute = Attribute("ssn", "VARCHAR(100)", false)
+        val tableIdentifier = TableIdentifier("transducer", "person")
+        var attribute = Attribute("ssn", "VARCHAR(100)", false, tableIdentifier)
         assertEquals("ssn VARCHAR(100) NOT NULL", attribute.toSql())
-        attribute = Attribute("ssn", "VARCHAR(100)", true)
+        attribute = Attribute("ssn", "VARCHAR(100)", true, tableIdentifier)
         assertEquals("ssn VARCHAR(100)", attribute.toSql())
     }
 }
