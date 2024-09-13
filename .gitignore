@@ -59,3 +59,4 @@ replay_pid*
 .idea
 
 full_transducer.sql
+**/bin
