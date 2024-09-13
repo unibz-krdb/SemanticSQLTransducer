@@ -27,9 +27,4 @@ class Generator(val context: Context) {
         }
     }
 
-    fun generateInsertDeleteTables(): List<Table> {
-        val tables = listOf<Table>()
-        val schemas = listOf(context.source, context.target)
-        return tables
-    }
 }
