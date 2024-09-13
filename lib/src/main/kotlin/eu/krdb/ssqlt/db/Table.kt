@@ -7,9 +7,9 @@ import net.sf.jsqlparser.parser.CCJSqlParserUtil
 import net.sf.jsqlparser.statement.create.table.CreateTable
 
 class Table(
-        val identifier: TableIdentifier,
-        val attributes: List<Attribute>,
-        val primaryKey: List<String>,
+    val identifier: TableIdentifier,
+    val attributes: List<Attribute>,
+    val primaryKey: List<String>,
 ) {
 
     companion object {
@@ -28,19 +28,16 @@ class Table(
                 if (it is CreateTable) {
                     val identifier = TableIdentifier(it.table.schemaName, it.table.name)
                     val attributes =
-                            it.columnDefinitions.map {
-                                Attribute(
-                                        it.columnName,
-                                        it.colDataType.dataType,
-                                        it.columnSpecs.isNullOrEmpty(),
-                                        identifier
-                                )
-                            }
+                        it.columnDefinitions.map {
+                            Attribute(
+                                it.columnName,
+                                it.colDataType.dataType,
+                                it.columnSpecs.isNullOrEmpty(),
+                                identifier)
+                        }
                     val primaryKey =
-                            it.indexes.find { it.type == "PRIMARY KEY" }?.columns?.map {
-                                it.columnName
-                            }
-                                    ?: emptyList()
+                        it.indexes.find { it.type == "PRIMARY KEY" }?.columns?.map { it.columnName }
+                            ?: emptyList()
                     return Table(identifier, attributes, primaryKey)
                 } else {
                     throw Exception("Not a Create Table statement")
