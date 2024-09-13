@@ -12,20 +12,20 @@ class TableTest {
     fun testConstructor() {
         val schema = "transducer"
         val name = "person"
+        val tableIdentifier = TableIdentifier(schema, name)
         val attributes =
             listOf(
-                Attribute("ssn", "VARCHAR(100)", false),
-                Attribute("phone", "VARCHAR(100)", false),
-                Attribute("manager", "VARCHAR(100)", true),
-                Attribute("title", "VARCHAR(100)", true),
-                Attribute("city", "VARCHAR(100)", false),
-                Attribute("country", "VARCHAR(100)", false),
-                Attribute("mayor", "VARCHAR(100)", false),
+                Attribute("ssn", "VARCHAR(100)", false, tableIdentifier),
+                Attribute("phone", "VARCHAR(100)", false, tableIdentifier),
+                Attribute("manager", "VARCHAR(100)", true, tableIdentifier),
+                Attribute("title", "VARCHAR(100)", true, tableIdentifier),
+                Attribute("city", "VARCHAR(100)", false, tableIdentifier),
+                Attribute("country", "VARCHAR(100)", false, tableIdentifier),
+                Attribute("mayor", "VARCHAR(100)", false, tableIdentifier),
             )
         val primaryKey = listOf("ssn", "phone")
-        val db = Table(schema, name, attributes, primaryKey)
-        assertEquals(schema, db.schema)
-        assertEquals(name, db.name)
+        val db = Table(tableIdentifier, attributes, primaryKey)
+        assertEquals(tableIdentifier, db.identifier)
         assertEquals(attributes, db.attributes)
         assertEquals(primaryKey, db.primaryKey)
     }
@@ -34,35 +34,36 @@ class TableTest {
     fun testToSql() {
         val schema = "ssqlt_test"
         val name = "_person"
+        val tableIdentifier = TableIdentifier(schema, name)
         val attributes =
             listOf(
-                Attribute("ssn", "VARCHAR (100)", false),
-                Attribute("phone", "VARCHAR (100)", false),
-                Attribute("manager", "VARCHAR (100)", true),
-                Attribute("title", "VARCHAR (100)", true),
-                Attribute("city", "VARCHAR (100)", false),
-                Attribute("country", "VARCHAR (100)", false),
-                Attribute("mayor", "VARCHAR (100)", false),
+                Attribute("ssn", "VARCHAR (100)", false, tableIdentifier),
+                Attribute("phone", "VARCHAR (100)", false, tableIdentifier),
+                Attribute("manager", "VARCHAR (100)", true, tableIdentifier),
+                Attribute("title", "VARCHAR (100)", true, tableIdentifier),
+                Attribute("city", "VARCHAR (100)", false, tableIdentifier),
+                Attribute("country", "VARCHAR (100)", false, tableIdentifier),
+                Attribute("mayor", "VARCHAR (100)", false, tableIdentifier),
             )
         val primaryKey = listOf("ssn", "phone")
-        val db = Table(schema, name, attributes, primaryKey)
+        val db = Table(tableIdentifier, attributes, primaryKey)
         assertEquals(sqlPersonCreate, db.toCreateTableSql())
     }
 
     @Test
     fun testFromString() {
         val table = Table.fromString(sqlPersonCreate)
-        assertEquals("ssqlt_test", table.schema)
-        assertEquals("_person", table.name)
+        val tableIdentifier = TableIdentifier("ssqlt_test", "_person")
+        assertEquals(tableIdentifier, table.identifier)
         assertEquals(
             listOf(
-                Attribute("ssn", "VARCHAR (100)", false),
-                Attribute("phone", "VARCHAR (100)", false),
-                Attribute("manager", "VARCHAR (100)", true),
-                Attribute("title", "VARCHAR (100)", true),
-                Attribute("city", "VARCHAR (100)", false),
-                Attribute("country", "VARCHAR (100)", false),
-                Attribute("mayor", "VARCHAR (100)", false),
+                Attribute("ssn", "VARCHAR (100)", false, tableIdentifier),
+                Attribute("phone", "VARCHAR (100)", false, tableIdentifier),
+                Attribute("manager", "VARCHAR (100)", true, tableIdentifier),
+                Attribute("title", "VARCHAR (100)", true, tableIdentifier),
+                Attribute("city", "VARCHAR (100)", false, tableIdentifier),
+                Attribute("country", "VARCHAR (100)", false, tableIdentifier),
+                Attribute("mayor", "VARCHAR (100)", false, tableIdentifier),
             ),
             table.attributes)
         assertEquals(listOf("ssn", "phone"), table.primaryKey)
