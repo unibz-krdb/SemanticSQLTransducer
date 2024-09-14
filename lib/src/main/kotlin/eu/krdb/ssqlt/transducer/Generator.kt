@@ -7,24 +7,29 @@ class Generator(val context: Context) {
 
     companion object {
 
+        private fun generateInsertDeleteTables(table: Table): List<Table> {
+            return listOf(
+                Table(
+                    table.schemaName,
+                    table.tableName + "_INSERT",
+                    table.attributes,
+                    table.primaryKey
+                ),
+                Table(
+                    table.schemaName,
+                    table.tableName + "_DELETE",
+                    table.attributes,
+                    table.primaryKey
+                )
+            )
+        }
+
         private fun generateInsertDeleteTables(schema: Schema): List<Table> {
             val tables = mutableListOf<Table>()
-            for (table in schema.tables) {
-                tables.add(
-                    Table(
-                        table.schemaName,
-                        table.tableName + "_INSERT",
-                        table.attributes,
-                        table.primaryKey))
-                tables.add(
-                    Table(
-                        table.schemaName,
-                        table.tableName + "_DELETE",
-                        table.attributes,
-                        table.primaryKey))
-            }
+            schema.tables.forEach { table -> tables.addAll(generateInsertDeleteTables(table)) }
             return tables
         }
+
     }
 
 }
