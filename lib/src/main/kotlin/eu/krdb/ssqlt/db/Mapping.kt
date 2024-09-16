@@ -7,10 +7,7 @@ class Mapping(
     val attributes: List<Attribute>,
     val nullAttributes: Map<Attribute, Boolean>
 ) {
-    fun toSql(
-        includeSchema: Boolean = true,
-        customSourceTable: String? = null
-    ): String {
+    fun toSql(includeSchema: Boolean = true, customSourceTable: String? = null): String {
 
         var strSourceTable = customSourceTable ?: sourceTable
         if (includeSchema) {
@@ -18,13 +15,14 @@ class Mapping(
         }
 
         // SELECT
-        var sqlString = "SELECT ${attributes.map { a -> strSourceTable + "." + a.name }.joinToString( ", ")}"
+        var sqlString =
+            "SELECT ${attributes.map { a -> strSourceTable + "." + a.name }.joinToString( ", ")}"
 
         // FROM
         sqlString += " FROM ${strSourceTable}"
 
         // WHERE
-        if (nullAttributes.isEmpty()) {
+        if (!nullAttributes.isEmpty()) {
             sqlString += " WHERE"
             var andString = " "
             nullAttributes.forEach { (key, value) ->
@@ -36,7 +34,7 @@ class Mapping(
                 }
                 andString = " AND "
             }
-        };
+        }
 
         return sqlString
     }
