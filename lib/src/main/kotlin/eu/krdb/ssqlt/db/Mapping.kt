@@ -1,13 +1,11 @@
 package eu.krdb.ssqlt.db
 
-import java.util.Dictionary
-
 class Mapping(
     val schema: String,
     val sourceTable: String,
     val targetTable: String,
     val attributes: List<Attribute>,
-    val nullAttributes: Dictionary<Attribute, Boolean>
+    val nullAttributes: Map<Attribute, Boolean>
 ) {
     fun toSql(
         includeSchema: Boolean = true,
@@ -29,9 +27,9 @@ class Mapping(
         if (nullAttributes.isEmpty()) {
             sqlString += " WHERE"
             var andString = " "
-            for (key in nullAttributes.keys()) {
+            nullAttributes.forEach { (key, value) ->
                 sqlString += andString
-                if (!nullAttributes[key]) {
+                if (!value) {
                     sqlString += "${strSourceTable}.${key.name} IS NOT NULL"
                 } else {
                     sqlString += "${strSourceTable}.${key.name} IS NULL"
